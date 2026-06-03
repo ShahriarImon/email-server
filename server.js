@@ -144,8 +144,8 @@ app.post("/send-contact", upload.none(), async (req, res) => {
   try {
     const mailOptions = {
       from: `"${name}" <${email}>`,
-      to: "imon.shahriar012@gmail.com, imon.cse.ewu@gmail.com, rabbi0268@gmail.com", // receive on your Gmail
-      // to: "info@shebatech.com, sales@shebatech.com.bd, farhan.islam@shebatech.com.bd", // receive on your Gmail
+      // to: "imon.shahriar012@gmail.com, imon.cse.ewu@gmail.com, rabbi0268@gmail.com", // receive on your Gmail
+      to: "info@shebatech.com, sales@shebatech.com.bd, farhan.islam@shebatech.com.bd", // receive on your Gmail
       subject: `New inquiry from ${name}`,
 
       // 👉 HTML EMAIL
@@ -172,7 +172,7 @@ app.post("/send-contact", upload.none(), async (req, res) => {
       `,
     };
 
-    // Send email asynchronously in the background to prevent 504 Gateway Timeout
+    //  Send email asynchronously in the background to prevent 504 Gateway Timeout
     transporter
       .sendMail(mailOptions)
       .then(() => console.log(`Contact email sent successfully from ${name}`))
