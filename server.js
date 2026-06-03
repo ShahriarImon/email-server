@@ -144,8 +144,8 @@ app.post("/send-contact", upload.none(), async (req, res) => {
   try {
     const mailOptions = {
       from: `"${name}" <${email}>`,
-      // to: "imon.shahriar012@gmail.com, imon.cse.ewu@gmail.com, rabbi0268@gmail.com", // receive on your Gmail
-      to: "info@shebatech.com, sales@shebatech.com.bd, farhan.islam@shebatech.com.bd", // receive on your Gmail
+      to: "imon.shahriar012@gmail.com, imon.cse.ewu@gmail.com, rabbi0268@gmail.com", // receive on your Gmail
+      // to: "info@shebatech.com, sales@shebatech.com.bd, farhan.islam@shebatech.com.bd", // receive on your Gmail
       subject: `New inquiry from ${name}`,
 
       // 👉 HTML EMAIL
@@ -248,8 +248,8 @@ app.post("/send-email-with-file", upload.single("file"), async (req, res) => {
   try {
     const mailOptions = {
       from: email,
-      // to: "rabbi0268@gmail.com", // receive on your Gmail
-      to: "info@shebatech.com", // receive on your Gmail
+      to: "rabbi0268@gmail.com", // receive on your Gmail
+      // to: "info@shebatech.com", // receive on your Gmail
       subject: `New message from ${name}`,
 
       html: `
