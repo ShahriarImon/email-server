@@ -5,6 +5,9 @@ import dotenv from "dotenv";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
+import dns from "dns";
+
+dns.setDefaultResultOrder("ipv4first");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,8 +27,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // transporter (Gmail SMTP)
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+// });
+
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -51,6 +64,18 @@ app.get("/", (req, res) => {
     success: true,
     message: "Server is running successfully 🚀",
   });
+});
+
+app.get("/smtp-test", async (req, res) => {
+  try {
+    await transporter.verify();
+    res.json({ success: true });
+  } catch (err) {
+    res.json({
+      success: false,
+      error: err.message,
+    });
+  }
 });
 
 // Download portfolio API
