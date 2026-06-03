@@ -143,13 +143,13 @@ app.post("/send-contact", upload.none(), async (req, res) => {
     };
 
     // Send email asynchronously in the background to prevent 504 Gateway Timeout
-    transporter
-      .sendMail(mailOptions)
-      .then(() => console.log(`Contact email sent successfully from ${name}`))
-      .catch((error) =>
-        console.error("Background Email Error [/send-contact]:", error),
-      );
-
+    // transporter
+    //   .sendMail(mailOptions)
+    //   .then(() => console.log(`Contact email sent successfully from ${name}`))
+    //   .catch((error) =>
+    //     console.error("Background Email Error [/send-contact]:", error),
+    //   );
+    await transporter.sendMail(mailOptions);
     // Respond immediately to the client
     res.status(200).json({
       success: true,
@@ -243,12 +243,14 @@ app.post("/send-email-with-file", upload.single("file"), async (req, res) => {
     };
 
     // Send email asynchronously in the background to prevent 504 Gateway Timeout
-    transporter
-      .sendMail(mailOptions)
-      .then(() => console.log(`Email with file sent successfully from ${name}`))
-      .catch((error) =>
-        console.error("Background Email Error [/send-email-with-file]:", error),
-      );
+    // transporter
+    //   .sendMail(mailOptions)
+    //   .then(() => console.log(`Email with file sent successfully from ${name}`))
+    //   .catch((error) =>
+    //     console.error("Background Email Error [/send-email-with-file]:", error),
+    //   );
+
+    await transporter.sendMail(mailOptions);
 
     // Respond immediately to the client
     res.status(200).json({
