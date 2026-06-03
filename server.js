@@ -77,7 +77,12 @@ app.get("/smtp-test", async (req, res) => {
     });
   }
 });
-
+app.get("/env-test", (req, res) => {
+  res.json({
+    EMAIL_USER: !!process.env.EMAIL_USER,
+    EMAIL_PASS: !!process.env.EMAIL_PASS,
+  });
+});
 // Download portfolio API
 app.get("/download-portfolio", (req, res) => {
   const filePath = path.join(__dirname, "files", "Company Portfolio.pdf");
